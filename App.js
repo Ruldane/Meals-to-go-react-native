@@ -2,9 +2,11 @@ import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
 import { Text } from "react-native";
 import { ThemeProvider } from "styled-components/native";
-import { NavigationContainer } from "@react-navigation/native";
+import "react-native-gesture-handler";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+
+import { Navigation } from "./src/infrastructure/navigation";
 
 import {
   useFonts as useOswald,
@@ -64,19 +66,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <LocationContextProvider>
           <RestaurantsContextProvider>
-            <NavigationContainer>
-              <Tab.Navigator
-                screenOptions={createScreenOptions}
-                tabBarOptions={{
-                  activeTintColor: "tomato",
-                  inactiveTintColor: "gray",
-                }}
-              >
-                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-                <Tab.Screen name="Map" component={Map} />
-                <Tab.Screen name="Settings" component={Settings} />
-              </Tab.Navigator>
-            </NavigationContainer>
+            <Navigation />
           </RestaurantsContextProvider>
         </LocationContextProvider>
       </ThemeProvider>
