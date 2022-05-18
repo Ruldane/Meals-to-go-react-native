@@ -28,8 +28,6 @@ export const MapScreen = ({ navigation }) => {
     setLatDelta(northeastLat - southwestLat);
   }, [location, viewport]);
 
-  console.log(viewport);
-
   return (
     <>
       <Search />
