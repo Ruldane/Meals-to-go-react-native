@@ -18,3 +18,5 @@ web-build/
 .eslintrc.js
 package-lock.json
 yarn.lock
+.env
+firebaseConf.js
