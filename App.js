@@ -15,6 +15,7 @@ import { theme } from "./src/infrastructure/theme";
 import { RestaurantsContextProvider } from "./src/services/restaurant/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -26,22 +27,6 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword("mo", "test")
-        .then((user) => {
-          console.log(user);
-          setIsAuthenticated(true);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }, 2000);
-  }, []);
-
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -57,13 +42,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Navigation />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
