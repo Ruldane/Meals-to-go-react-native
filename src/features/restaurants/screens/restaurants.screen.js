@@ -12,12 +12,7 @@ import { RestaurantsContext } from "../../../services/restaurant/restaurants.con
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 
 import { Search } from "../components/search-component";
-
-const RestaurantList = styled(FlatList).attrs({
-  contentContainerStyle: {
-    padding: 16,
-  },
-})``;
+import { RestaurantList } from "../components/restaurant-list.styles";
 
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
